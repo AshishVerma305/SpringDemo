@@ -14,14 +14,6 @@ public class Product {
         this.title = title;
     }
 
-    public boolean isInStock() {
-        return inStock;
-    }
-
-    public void setInStock(boolean inStock) {
-        this.inStock = inStock;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -36,5 +28,13 @@ public class Product {
 
     public void setSalesPrice(int salesPrice) {
         this.salesPrice = salesPrice;
+    }
+
+    public boolean isInStock() {
+        return inStock;
+    }
+
+    public void setInStock(boolean inStock) {
+        this.inStock = inStock;
     }
 }
