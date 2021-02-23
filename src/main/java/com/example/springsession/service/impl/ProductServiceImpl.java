@@ -31,8 +31,26 @@ public class ProductServiceImpl implements ProductService {
             product.setSalesPrice(((Double)k.get("offerPrice")).intValue());
             productDTOs.add(product);
         }
+        String q= "stockLocation:"+"\""+ productRequest.getLocationBaseProducts()+"\"";
 
+
+            // call searchClient.getProduct with q=location: +  productRequest.getLocation()
+        // parse the response and stitch the rsponse in response i.e respose.setLocat..(product2)
+        Map<String,Object> product2 = searchClient.getProduct(q);
+        List<LinkedHashMap<String,Object>> location = (List<LinkedHashMap<String, Object>>) ((Map)product2.get("response")).get("docs");
+        List<Product> productDTOs2 = new ArrayList<>();
+        for (LinkedHashMap<String,Object> k : l)
+        {
+            Product product=new Product();
+            product.setDescription((String) k.get("description"));
+
+            product.setInStock((int) k.get("isInStock") == 1? true: false );
+            product.setTitle((String)k.get("nameSearch") );
+            product.setSalesPrice(((Double)k.get("offerPrice")).intValue());
+            productDTOs2.add(product);
+        }
         response.setProductList(productDTOs);
+        response.setLocationBasedProducts(productDTOs2);
         return response;
     }
 }
